@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "BetterMoodle",
+  "version": "0.0.1",
+  "description": "Cross out completed assignments in Moodle calendar",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "content/index.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content/calender.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}

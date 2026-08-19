@@ -1,11 +1,20 @@
-if (typeof importScripts === "function") {
-  importScripts("calender.js");
+class BackgroundManager {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    chrome.runtime.onInstalled.addListener(this.onInstalled.bind(this));
+    chrome.runtime.onMessage.addListener(this.handleMessage.bind(this));
+  }
+
+  onInstalled() {
+    console.log("BetterMoodle extension installed");
+  }
+
+  handleMessage(request, sender, sendResponse) {
+    return true;
+  }
 }
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  return MessageHandler.handle(request, sender, sendResponse);
-});
-
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("CatWatcher extension installed");
-});
+new BackgroundManager();

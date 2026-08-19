@@ -1,0 +1,15 @@
+.bm-completed .eventname,
+.bm-completed.eventname {
+  text-decoration: line-through !important;
+  opacity: 0.6 !important;
+  color: #888 !important;
+}
+
+.bm-completed .calendar_event_course {
+  background-color: #ccc !important;
+  border-color: #ccc !important;
+}
+
+.bm-completed .icon {
+  opacity: 0.5 !important;
+}
