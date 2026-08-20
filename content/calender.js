@@ -57,7 +57,6 @@ class CalendarManager {
       }
     });
 
-    // Debounce the auto-check so we don't fire it multiple times rapidly
     clearTimeout(this.checkTimeout);
     this.checkTimeout = setTimeout(() => this.autoCheckEvents(), 1000);
   }
@@ -71,10 +70,8 @@ class CalendarManager {
       const eventId = this.getEventIdentifier(container);
       if (!eventId) continue;
 
-      // Skip if already completed
       if (this.completedEvents.has(eventId)) continue;
 
-      // Skip if we already checked this event in this session
       if (container.dataset.bmChecked === "true") continue;
       container.dataset.bmChecked = "true";
 
@@ -127,7 +124,6 @@ class CalendarManager {
   }
 
   checkIfPageIsDone(doc) {
-    // Extract all text from the page and normalize whitespace to make matching robust
     const pageText = (doc.body ? doc.body.textContent : '').replace(/\s+/g, ' ').toLowerCase();
 
     // 1. Check for standard Moodle "Done" badges
@@ -151,14 +147,11 @@ class CalendarManager {
       return true;
     }
 
-    // 4. Check for Forum completion
-    // First, find the user's name from the current page's navigation/header
     const userMenu = document.querySelector('.usermenu, .userbutton');
     if (userMenu) {
         let userName = '';
         const img = userMenu.querySelector('img[alt]');
         if (img && img.alt) {
-            // Usually alt text is "Picture of John Doe"
             userName = img.alt.replace('Picture of ', '').trim().toLowerCase();
         } else {
             const nameEl = userMenu.querySelector('.usertext, .userbutton, .usertext-name');
@@ -166,12 +159,9 @@ class CalendarManager {
         }
 
         if (userName) {
-            // Check if their name is in the forum's author list in the fetched document
             const authors = doc.querySelectorAll('.author, .starter, .lastpost, td, .media-body');
             for (const author of authors) {
-                // If the author text exactly matches or contains the user's name
                 if (author.textContent.toLowerCase().includes(userName)) {
-                    // Make sure we are actually looking at a forum page
                     if (pageText.includes('add a new discussion topic') || doc.querySelector('.forumheaderlist, .discussion-list')) {
                         return true;
                     }
@@ -180,7 +170,6 @@ class CalendarManager {
         }
     }
 
-    // 5. Check for completion images (older Moodle versions)
     const completionImages = doc.querySelectorAll('img[src*="completion-auto-y"], img[src*="completion-manual-y"]');
     if (completionImages.length > 0) {
       return true;
