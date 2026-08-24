@@ -1,17 +1,22 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Cross out completed assignments in Moodle calendar",
   "permissions": [
     "storage"
+  ],
+  "host_permissions": [
+    "https://*.wolfware.ncsu.edu/*"
   ],
   "background": {
     "service_worker": "content/index.js"
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": [
+        "https://*.wolfware.ncsu.edu/*"
+      ],
       "js": ["content/calender.js"],
       "css": ["styles.css"]
     }
