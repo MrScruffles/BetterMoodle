@@ -13,3 +13,20 @@
 .bm-completed .icon {
   opacity: 0.5 !important;
 }
+
+.bm-quiz-hidden {
+  display: none !important;
+}
+
+.bm-quiz-status {
+  margin: 0 0 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c7d2e0;
+  background: #f4f7fb;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.bm-quiz-injected {
+  margin-top: 1.25rem;
+}

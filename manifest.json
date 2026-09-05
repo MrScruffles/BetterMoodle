@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.3",
-  "description": "Cross out completed assignments in Moodle calendar",
+  "version": "0.0.5",
+  "description": "Cross out completed Moodle calendar assignments and show quiz questions on one page",
   "permissions": [
     "storage"
   ],
@@ -17,7 +17,10 @@
       "matches": [
         "https://*.wolfware.ncsu.edu/*"
       ],
-      "js": ["content/calender.js"],
+      "js": [
+        "content/calender.js",
+        "content/quiz.js"
+      ],
       "css": ["styles.css"]
     }
   ]
