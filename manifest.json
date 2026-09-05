@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Cross out completed Moodle calendar assignments and show quiz questions on one page",
   "permissions": [
     "storage"
@@ -21,7 +21,8 @@
         "content/calender.js",
         "content/quiz.js"
       ],
-      "css": ["styles.css"]
+      "css": ["styles.css"],
+      "run_at": "document_idle"
     }
   ]
 }

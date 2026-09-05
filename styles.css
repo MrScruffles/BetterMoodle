@@ -30,3 +30,20 @@
 .bm-quiz-injected {
   margin-top: 1.25rem;
 }
+
+.bm-quiz-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.bm-load-all-questions {
+  white-space: nowrap;
+}
+
+.bm-load-all-questions-nav {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.5rem 0;
+}
