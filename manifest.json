@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Cross out completed Moodle calendar assignments and show quiz questions on one page",
   "permissions": [
     "storage"
@@ -10,7 +10,16 @@
     "https://*.wolfware.ncsu.edu/*"
   ],
   "background": {
-    "service_worker": "content/index.js"
+    "service_worker": "content/index.js",
+    "scripts": [
+      "content/index.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bettermoodle@ashi-division",
+      "strict_min_version": "121.0"
+    }
   },
   "content_scripts": [
     {
