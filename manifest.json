@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Cross out completed Moodle calendar assignments and show quiz questions on one page",
   "permissions": [
     "storage"
@@ -18,10 +18,13 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "bettermoodle@ashi-division",
-      "strict_min_version": "121.0",
+      "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
       }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   },
   "content_scripts": [
