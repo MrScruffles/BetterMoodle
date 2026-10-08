@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterMoodle",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Cross out completed Moodle calendar assignments and show quiz questions on one page",
   "permissions": [
     "storage"
