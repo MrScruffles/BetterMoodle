@@ -21,10 +21,13 @@ jobs:
 
       - name: Package
         run: |
-          mkdir -p dist
-          FILES="manifest.json content styles.css"
-          zip -r "dist/BetterMoodle-chrome-${{ steps.meta.outputs.version }}.zip" $FILES
-          zip -r "dist/BetterMoodle-firefox-${{ steps.meta.outputs.version }}.xpi" $FILES
+          mkdir -p dist stage/chrome stage/firefox
+          cp -r content styles.css stage/chrome/
+          cp -r content styles.css stage/firefox/
+          jq 'del(.background.scripts, .browser_specific_settings)' manifest.json > stage/chrome/manifest.json
+          jq 'del(.background.service_worker)' manifest.json > stage/firefox/manifest.json
+          (cd stage/chrome && zip -r "../../dist/BetterMoodle-chrome-${{ steps.meta.outputs.version }}.zip" .)
+          (cd stage/firefox && zip -r "../../dist/BetterMoodle-firefox-${{ steps.meta.outputs.version }}.xpi" .)
 
       - name: Sign Firefox build
         if: startsWith(github.ref, 'refs/tags/v')
@@ -32,9 +35,8 @@ jobs:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
         run: |
-          mkdir -p stage signed
-          cp -r manifest.json content styles.css stage/
-          npx --yes web-ext sign --source-dir stage --artifacts-dir signed --channel unlisted --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET"
+          mkdir -p signed
+          npx --yes web-ext sign --source-dir stage/firefox --artifacts-dir signed --channel unlisted --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET"
           cp signed/*.xpi "dist/BetterMoodle-firefox-${{ steps.meta.outputs.version }}.xpi"
 
       - uses: actions/upload-artifact@v4
