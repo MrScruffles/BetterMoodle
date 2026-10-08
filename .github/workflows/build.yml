@@ -22,7 +22,7 @@ jobs:
       - name: Package
         run: |
           mkdir -p dist
-          FILES="manifest.json content icons images styles.css"
+          FILES="manifest.json content styles.css"
           zip -r "dist/BetterMoodle-chrome-${{ steps.meta.outputs.version }}.zip" $FILES
           zip -r "dist/BetterMoodle-firefox-${{ steps.meta.outputs.version }}.xpi" $FILES
 
@@ -33,7 +33,7 @@ jobs:
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
         run: |
           mkdir -p stage signed
-          cp -r manifest.json content icons images styles.css stage/
+          cp -r manifest.json content styles.css stage/
           npx --yes web-ext sign --source-dir stage --artifacts-dir signed --channel unlisted --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET"
           cp signed/*.xpi "dist/BetterMoodle-firefox-${{ steps.meta.outputs.version }}.xpi"
 
